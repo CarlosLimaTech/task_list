@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
         <h1>Login</h1>
         <form method="POST" action="/login">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Digite seu username" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
@@ -23,6 +23,11 @@
         <div class="footer">
             Não tem cadastro? <a href="#">Cadastre-se</a>
         </div>
-    </div>
+        <!-- Exibe mensagem de erro, se existir -->
+        <div class="error-message">
+            <p th:if="${error}" th:text="${error}"></p>
+        </div>
+    </div>    
 </body>
 </html>
+

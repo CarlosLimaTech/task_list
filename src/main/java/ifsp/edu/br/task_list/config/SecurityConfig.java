@@ -2,11 +2,20 @@ package ifsp.edu.br.task_list.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+    @SuppressWarnings("deprecation")
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // Configura o PasswordEncoder como NoOp (sem codificação)
+        return NoOpPasswordEncoder.getInstance();
+    }
 
     @SuppressWarnings("removal")
     @Bean
@@ -14,11 +23,14 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/login").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll() // Permite acesso a arquivos estáticos
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("email") // Alterado para email
+                .passwordParameter("password")
                 .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
             )
