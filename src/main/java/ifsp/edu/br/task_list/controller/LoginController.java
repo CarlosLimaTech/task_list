@@ -28,14 +28,14 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email, 
-                        @RequestParam("password") String password, 
-                        RedirectAttributes redirectAttributes) {
+    public String login(@RequestParam("email") String email,
+            @RequestParam("password") String password,
+            RedirectAttributes redirectAttributes) {
         // Busca o usuário pelo email
         Usuario usuario = usuarioService.findByEmail(email);
 
         // Verifica se o usuário existe e se a senha está correta
-        if (usuario != null && usuario.getPassword().equals(password)) {
+        if (usuario != null && usuarioService.validarSenha(usuario, password)) {
             return "redirect:/dashboard";
         }
 
@@ -43,4 +43,5 @@ public class LoginController {
         redirectAttributes.addFlashAttribute("error", "Email ou senha inválidos");
         return "redirect:/login";
     }
+
 }

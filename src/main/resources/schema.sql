@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Usuario (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(45),
     email VARCHAR(45),
     password VARCHAR(45)

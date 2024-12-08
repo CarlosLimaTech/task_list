@@ -18,7 +18,6 @@ public class UsuarioService {
     }
 
     public boolean validarSenha(Usuario usuario, String senha) {
-        // Como o NoOpPasswordEncoder está configurado, a senha é comparada diretamente
         return usuario != null && usuario.getPassword().equals(senha);
-    }
+    }    
 }

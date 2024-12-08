@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="form-container">
-        <h1>Login</h1>
-        <form method="POST" action="/login">
+        <h1>Cadastro</h1>
+        <form method="POST" action="/register">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
+            </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu email" required>
@@ -18,14 +22,10 @@
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
             </div>
-            <button type="submit" class="btn">Entrar</button>
+            <button type="submit" class="btn">Cadastrar</button>
         </form>
         <div class="footer">
-            Não tem cadastro? <a href="/register">Cadastre-se</a>
-        </div>
-        <!-- Dentro da div principal no login.html -->
-        <div class="success-message">
-            <p th:if="${param.success}" th:text="'Cadastro realizado com sucesso! Faça login.'"></p>
+            Já tem cadastro? <a href="/login">Faça login</a>
         </div>
     </div>
 </body>

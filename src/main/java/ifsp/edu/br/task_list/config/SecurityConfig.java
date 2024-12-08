@@ -13,7 +13,7 @@ public class SecurityConfig {
     @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Configura o PasswordEncoder como NoOp (sem codificação)
+        // Configura o NoOpPasswordEncoder para texto simples
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/login", "/register").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             )
