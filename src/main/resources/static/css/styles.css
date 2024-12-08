@@ -13,7 +13,8 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 100%;
+    max-width: 400px; /* Garante que a largura não fique maior que 400px */
     text-align: center;
 }
 
@@ -24,7 +25,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
@@ -43,6 +44,7 @@ body {
     border-radius: 5px;
     outline: none;
     background: #f9f9f9;
+    box-sizing: border-box; /* Para evitar problemas de largura */
 }
 
 .form-group input:focus {
@@ -68,6 +70,7 @@ body {
 .footer {
     margin-top: 15px;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 .footer a {
@@ -77,45 +80,4 @@ body {
 
 .footer a:hover {
     text-decoration: underline;
-}
-
-/* Estilos gerais */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f4f8;
-    font-family: Arial, sans-serif;
-}
-
-.dashboard-container {
-    text-align: center;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #555;
 }
