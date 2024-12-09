@@ -4,7 +4,6 @@ import ifsp.edu.br.task_list.model.Projeto;
 import ifsp.edu.br.task_list.service.ProjetoService;
 import ifsp.edu.br.task_list.service.UsuarioService;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +40,10 @@ public class ProjetoController {
         return "redirect:/projetos";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarProjeto(@PathVariable Long id) {
+    @PostMapping("/deletar/{id}")
+    public String deletarProjeto(@PathVariable Long id) {
         projetoService.deletarProjeto(id);
-        return ResponseEntity.noContent().build();
+        return "redirect:/projetos"; // Redireciona para a página atualizada
     }
 
     @GetMapping
