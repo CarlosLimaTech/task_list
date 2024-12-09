@@ -28,16 +28,16 @@ public class ProjetoController {
         return projetoService.listarProjetosPorUsuario(idUsuario);
     }
 
-    @PostMapping
+    @PostMapping("/criar")
     public String criarProjeto(
             @RequestParam("nomeProjeto") String nomeProjeto,
             @RequestParam("descricaoProjeto") String descricaoProjeto,
             @RequestParam("dataInicio") String dataInicio,
             @RequestParam("dataFim") String dataFim,
             Principal principal) {
-        String email = principal.getName();
+        String email = principal.getName(); // Recupera o email do usuário autenticado
         projetoService.criarProjeto(email, nomeProjeto, descricaoProjeto, dataInicio, dataFim);
-        return "redirect:/projetos";
+        return "redirect:/projetos"; // Redireciona para a página de projetos
     }
 
     @PostMapping("/deletar/{id}")

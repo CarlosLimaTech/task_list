@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projetos</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/deleteConfirmation.js"></script> <!-- Link para o script -->
+    <script src="/js/modal.js"></script> <!-- Link para o script do modal -->
+    <script src="/js/deleteConfirmation.js"></script> <!-- Link para o script de confirmação -->
+    <!-- <script src="/js/loadingMessage.js"></script> -->
 </head>
 <body>
     <div class="container">
@@ -17,6 +19,37 @@
             </div>
         </header>
 
+       <!-- Botão para abrir o modal -->
+        <button id="openModalButton" class="create-btn">Criar Novo Projeto</button>
+
+        <!-- Modal para criação de projeto -->
+        <div id="createProjectModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModalButton" class="close">&times;</span>
+                <h2>Criar Novo Projeto</h2>
+                <form th:action="@{/projetos/criar}" method="post" id="createProjectForm">
+                    <div>
+                        <label for="nomeProjeto">Nome do Projeto:</label>
+                        <input type="text" id="nomeProjeto" name="nomeProjeto" required>
+                    </div>
+                    <div>
+                        <label for="descricaoProjeto">Descrição:</label>
+                        <input type="text" id="descricaoProjeto" name="descricaoProjeto" required>
+                    </div>
+                    <div>
+                        <label for="dataInicio">Data de Início:</label>
+                        <input type="date" id="dataInicio" name="dataInicio" required>
+                    </div>
+                    <div>
+                        <label for="dataFim">Data de Fim:</label>
+                        <input type="date" id="dataFim" name="dataFim" required>
+                    </div>
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de Projetos -->
         <section class="project-list">
             <ul>
                 <li th:each="projeto : ${projetos}" class="project-item">
