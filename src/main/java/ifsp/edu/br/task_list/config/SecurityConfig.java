@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .usernameParameter("email") // Alterado para email
                 .passwordParameter("password")
-                .defaultSuccessUrl("/dashboard", true)
+                .defaultSuccessUrl("/projetos", true) // Redireciona para /projetos após o login
                 .permitAll()
             )
             .logout(logout -> logout

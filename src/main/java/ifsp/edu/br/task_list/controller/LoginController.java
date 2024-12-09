@@ -22,11 +22,6 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboardPage() {
-        return "dashboard";
-    }
-
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
             @RequestParam("password") String password,
@@ -36,12 +31,11 @@ public class LoginController {
 
         // Verifica se o usuário existe e se a senha está correta
         if (usuario != null && usuarioService.validarSenha(usuario, password)) {
-            return "redirect:/dashboard";
+            return "redirect:/projetos"; // Redireciona para /projetos após login bem-sucedido
         }
 
         // Adiciona uma mensagem de erro caso a autenticação falhe
         redirectAttributes.addFlashAttribute("error", "Email ou senha inválidos");
         return "redirect:/login";
     }
-
 }

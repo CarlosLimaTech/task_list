@@ -1,3 +1,4 @@
+/* login */
 body {
     display: flex;
     justify-content: center;
@@ -10,16 +11,102 @@ body {
 
 .form-container {
     background: white;
-    padding: 40px; /* Aumentando o espaçamento interno */
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 360px; /* Largura menor para corresponder ao exemplo */
+    max-width: 360px;
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 30px; /* Aumenta o espaço abaixo do título */
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background: #f9f9f9;
+    box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #7f53ac;
+    box-shadow: 0 0 4px rgba(127, 83, 172, 0.3);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.footer a {
+    color: #7f53ac;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+ /* cadastro */
+ body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f8f4ff;
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
     font-size: 1.5rem;
     color: #333;
 }
@@ -84,4 +171,129 @@ button:hover {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* projetos*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f4ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #333;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.user-info span {
+    font-weight: bold;
+}
+
+.logout-btn {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #ff4c4c;
+}
+
+.project-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-item {
+    margin-bottom: 10px;
+}
+
+.project-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.project-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #e0f7fa;
+    color: #007bff;
+}
+
+.delete-btn:hover {
+    background-color: #ffebee;
+    color: #ff6b6b;
 }

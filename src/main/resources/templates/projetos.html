@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>PROJETOS</h1>
+            <div class="user-info">
+                <span>Carlos Lima</span>
+                <a href="/logout" class="logout-btn">Sair</a>
+            </div>
+        </header>
+
+        <!-- Lista de Projetos -->
+        <section class="project-list">
+            <ul>
+                <li th:each="projeto : ${projetos}" class="project-item">
+                    <div class="project-card">
+                        <h2 th:text="${projeto.nomeProjeto}">Nome do Projeto</h2>
+                        <p>
+                            <span class="date-icon">⏱</span>
+                            <span th:text="${#dates.format(projeto.dataInicio, 'dd/MM/yyyy')}"></span>
+                            -
+                            <span th:text="${#dates.format(projeto.dataFim, 'dd/MM/yyyy')}"></span>
+                        </p>
+                        <div class="action-buttons">
+                            <a th:href="@{/projetos/editar/{id}(id=${projeto.idProjeto})}" class="edit-btn">✏️</a>
+                            <form th:action="@{/projetos/deletar/{id}(id=${projeto.idProjeto})}" method="post">
+                                <button type="submit" class="delete-btn">🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
