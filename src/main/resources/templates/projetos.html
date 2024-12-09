@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projetos</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/deleteConfirmation.js"></script>
 </head>
 <body>
     <div class="container">
@@ -31,9 +32,9 @@
                         </p>
                         <div class="action-buttons">
                             <a th:href="@{/projetos/editar/{id}(id=${projeto.idProjeto})}" class="edit-btn">✏️</a>
-                            <form th:action="@{/projetos/deletar/{id}(id=${projeto.idProjeto})}" method="post">
+                            <form th:action="@{/projetos/deletar/{id}(id=${projeto.idProjeto})}" method="post" class="delete-form" onsubmit="return confirmDelete(event);">
                                 <button type="submit" class="delete-btn">🗑️</button>
-                            </form>
+                            </form>                            
                         </div>
                     </div>
                 </li>
@@ -42,3 +43,4 @@
     </div>
 </body>
 </html>
+
