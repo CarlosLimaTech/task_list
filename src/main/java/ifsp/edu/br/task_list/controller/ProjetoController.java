@@ -74,4 +74,14 @@ public class ProjetoController {
         return "redirect:/projetos";
     }
 
+    @GetMapping("/{idProjeto}/kanban")
+    public String exibirQuadroKanban(@PathVariable Long idProjeto, Model model) {
+        Projeto projeto = projetoService.buscarPorId(idProjeto);
+        if (projeto == null) {
+            throw new RuntimeException("Projeto não encontrado");
+        }
+        model.addAttribute("projeto", projeto);
+        return "kanban";
+    }
+
 }

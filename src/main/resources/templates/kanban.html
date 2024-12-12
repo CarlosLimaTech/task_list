@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Projeto ' + ${projeto.nomeProjeto}"></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 th:text="${projeto.nomeProjeto}"></h1>
+            <span th:text="${#strings.concat(#dates.format(projeto.dataInicio, 'dd/MM/yyyy'), ' - ', #dates.format(projeto.dataFim, 'dd/MM/yyyy'))}"></span>
+            <div class="user-info">
+                <span>Carlos Lima</span>
+                <a href="/logout" class="logout-btn">Sair</a>
+            </div>
+        </header>
+
+        <button class="create-task-btn">Nova tarefa</button>
+
+        <div class="kanban-board">
+            <div class="kanban-column pending">
+                <h2>Pendente</h2>
+            </div>
+            <div class="kanban-column in-progress">
+                <h2>Em Andamento</h2>
+            </div>
+            <div class="kanban-column completed">
+                <h2>Concluído</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
