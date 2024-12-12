@@ -47,6 +47,33 @@
             </div>
         </div>
 
+        <div id="editProjectModal" class="modal">
+            <div class="modal-content">
+                <span id="closeEditModalButton" class="close">&times;</span>
+                <h2>Editar Projeto</h2>
+                <form th:action="@{/projetos/editar}" method="post" id="editProjectForm">
+                    <input type="hidden" id="editProjectId" name="id">
+                    <div>
+                        <label for="editNomeProjeto">Nome do Projeto:</label>
+                        <input type="text" id="editNomeProjeto" name="nomeProjeto" required>
+                    </div>
+                    <div>
+                        <label for="editDescricaoProjeto">Descrição:</label>
+                        <input type="text" id="editDescricaoProjeto" name="descricaoProjeto" required>
+                    </div>
+                    <div>
+                        <label for="editDataInicio">Data de Início:</label>
+                        <input type="date" id="editDataInicio" name="dataInicio" required>
+                    </div>
+                    <div>
+                        <label for="editDataFim">Data de Fim:</label>
+                        <input type="date" id="editDataFim" name="dataFim" required>
+                    </div>
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>        
+
         <section class="project-list">
             <ul>
                 <li th:each="projeto : ${projetos}" class="project-item">

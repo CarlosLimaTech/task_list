@@ -55,4 +55,25 @@ public class ProjetoService {
     public List<Projeto> listarTodos() {
         return projetoRepository.findAll();
     }
+
+    public Projeto buscarPorId(Long id) {
+        return projetoRepository.findById(id).orElse(null);
+    }
+    
+    public void atualizarProjeto(Long id, String nomeProjeto, String descricaoProjeto, String dataInicio, String dataFim) {
+        Projeto projeto = projetoRepository.findById(id).orElseThrow(() -> new RuntimeException("Projeto não encontrado"));
+    
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            projeto.setNomeProjeto(nomeProjeto);
+            projeto.setDescricaoProjeto(descricaoProjeto);
+            projeto.setDataInicio(formatter.parse(dataInicio));
+            projeto.setDataFim(formatter.parse(dataFim));
+    
+            projetoRepository.save(projeto);
+        } catch (ParseException e) {
+            throw new RuntimeException("Erro ao converter as datas.", e);
+        }
+    }
+    
 }

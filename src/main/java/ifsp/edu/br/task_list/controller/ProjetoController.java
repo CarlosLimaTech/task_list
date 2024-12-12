@@ -52,4 +52,26 @@ public class ProjetoController {
         model.addAttribute("projetos", projetos);
         return "projetos";
     }
+
+    @GetMapping("/editar/{id}")
+    @ResponseBody
+    public Projeto buscarProjetoPorId(@PathVariable Long id) {
+        Projeto projeto = projetoService.buscarPorId(id);
+        if (projeto == null) {
+            throw new RuntimeException("Projeto não encontrado");
+        }
+        return projeto;
+    }
+
+    @PostMapping("/editar")
+    public String salvarEdicaoProjeto(
+            @RequestParam("id") Long id,
+            @RequestParam("nomeProjeto") String nomeProjeto,
+            @RequestParam("descricaoProjeto") String descricaoProjeto,
+            @RequestParam("dataInicio") String dataInicio,
+            @RequestParam("dataFim") String dataFim) {
+        projetoService.atualizarProjeto(id, nomeProjeto, descricaoProjeto, dataInicio, dataFim);
+        return "redirect:/projetos";
+    }
+
 }
