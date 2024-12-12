@@ -35,21 +35,21 @@ public class ProjetoController {
             @RequestParam("dataInicio") String dataInicio,
             @RequestParam("dataFim") String dataFim,
             Principal principal) {
-        String email = principal.getName(); // Recupera o email do usuário autenticado
+        String email = principal.getName();
         projetoService.criarProjeto(email, nomeProjeto, descricaoProjeto, dataInicio, dataFim);
-        return "redirect:/projetos"; // Redireciona para a página de projetos
+        return "redirect:/projetos";
     }
 
     @PostMapping("/deletar/{id}")
     public String deletarProjeto(@PathVariable Long id) {
         projetoService.deletarProjeto(id);
-        return "redirect:/projetos"; // Redireciona para a página atualizada
+        return "redirect:/projetos";
     }
 
     @GetMapping
     public String listarTodosProjetos(Model model) {
         List<Projeto> projetos = projetoService.listarTodos();
         model.addAttribute("projetos", projetos);
-        return "projetos"; // Nome da página HTML que será renderizada
+        return "projetos";
     }
 }

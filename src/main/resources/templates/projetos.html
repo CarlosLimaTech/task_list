@@ -19,10 +19,8 @@
             </div>
         </header>
 
-       <!-- Botão para abrir o modal -->
         <button id="openModalButton" class="create-btn">Criar Novo Projeto</button>
 
-        <!-- Modal para criação de projeto -->
         <div id="createProjectModal" class="modal">
             <div class="modal-content">
                 <span id="closeModalButton" class="close">&times;</span>
@@ -49,7 +47,6 @@
             </div>
         </div>
 
-        <!-- Lista de Projetos -->
         <section class="project-list">
             <ul>
                 <li th:each="projeto : ${projetos}" class="project-item">

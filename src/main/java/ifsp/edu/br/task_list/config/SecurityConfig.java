@@ -13,7 +13,6 @@ public class SecurityConfig {
     @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Configura o NoOpPasswordEncoder para texto simples
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -29,9 +28,9 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .usernameParameter("email") // Alterado para email
+                .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/projetos", true) // Redireciona para /projetos após o login
+                .defaultSuccessUrl("/projetos", true)
                 .permitAll()
             )
             .logout(logout -> logout

@@ -13,7 +13,7 @@ public class Projeto {
     private Long idProjeto;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario") // Chave estrangeira
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     private String nomeProjeto;
@@ -29,7 +29,6 @@ public class Projeto {
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarefa> tarefas;
 
-    // Getters e Setters
     public Long getIdProjeto() {
         return idProjeto;
     }

@@ -26,15 +26,12 @@ public class LoginController {
     public String login(@RequestParam("email") String email,
             @RequestParam("password") String password,
             RedirectAttributes redirectAttributes) {
-        // Busca o usuário pelo email
         Usuario usuario = usuarioService.findByEmail(email);
 
-        // Verifica se o usuário existe e se a senha está correta
         if (usuario != null && usuarioService.validarSenha(usuario, password)) {
-            return "redirect:/projetos"; // Redireciona para /projetos após login bem-sucedido
+            return "redirect:/projetos";
         }
 
-        // Adiciona uma mensagem de erro caso a autenticação falhe
         redirectAttributes.addFlashAttribute("error", "Email ou senha inválidos");
         return "redirect:/login";
     }

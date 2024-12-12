@@ -28,20 +28,18 @@ public class RegisterController {
             @RequestParam("email") String email,
             @RequestParam("password") String password,
             Model model) {
-        // Verifica se o email já está registrado
+        
         if (usuarioRepository.findByEmail(email).isPresent()) {
             model.addAttribute("error", "Email já cadastrado!");
             return "register";
         }
 
-        // Salva o novo usuário no banco de dados sem o prefixo {noop}
         Usuario usuario = new Usuario();
         usuario.setUsername(name);
         usuario.setEmail(email);
-        usuario.setPassword(password); // Apenas salva a senha pura
+        usuario.setPassword(password);
         usuarioRepository.save(usuario);
 
-        // Redireciona para a página de login após o cadastro
         return "redirect:/login?success=true";
     }
 
