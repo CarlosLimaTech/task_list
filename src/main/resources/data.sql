@@ -15,5 +15,6 @@ VALUES
 
 INSERT INTO Tarefa (id_tarefa, id_projeto, id_usuario, nome, descricao_tarefa, prioridade, status, data_inicio, data_fim)
 VALUES
-(1, 1, 1, 'Tarefa 1', 'Descrição da Tarefa 1', 'Alta', 'Em andamento', '2024-01-10', '2024-01-20'),
-(2, 1, 1, 'Tarefa 2', 'Descrição da Tarefa 2', 'Média', 'Concluída', '2024-01-15', '2024-01-25');
+(1, 1, 1, 'Tarefa 1', 'Descrição da Tarefa 1', 'Alta', 'Em Andamento', '2024-01-10', '2024-01-20'),
+(2, 1, 1, 'Tarefa 2', 'Descrição da Tarefa 2', 'Média', 'Concluído', '2024-01-15', '2024-01-25'),
+(3, 1, 1, 'Tarefa 3', 'Descrição da Tarefa 3', 'Média', 'Pendente', '2024-01-15', '2024-01-25');

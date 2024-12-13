@@ -57,3 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const userInfo = document.querySelector('.user-info');
+    const logoutMenu = document.querySelector('.logout-menu');
+
+    userInfo.addEventListener('click', function() {
+        logoutMenu.style.display = logoutMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fecha o menu se clicar fora
+    document.addEventListener('click', function(event) {
+        if (!userInfo.contains(event.target)) {
+            logoutMenu.style.display = 'none';
+        }
+    });
+});

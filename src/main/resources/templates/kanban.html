@@ -4,30 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="'Projeto ' + ${projeto.nomeProjeto}"></title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/kanban.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 th:text="${projeto.nomeProjeto}"></h1>
-            <span th:text="${#strings.concat(#dates.format(projeto.dataInicio, 'dd/MM/yyyy'), ' - ', #dates.format(projeto.dataFim, 'dd/MM/yyyy'))}"></span>
+            <div>
+                <h1 th:text="'Projeto ' + ${projeto.nomeProjeto}"></h1>
+                <p th:text="${projeto.dataInicio} + ' - ' + ${projeto.dataFim}"></p>
+            </div>
             <div class="user-info">
-                <span>Carlos Lima</span>
-                <a href="/logout" class="logout-btn">Sair</a>
+                <i class="user-icon">👤</i>
+                <span th:text="${usuario.username}" class="user-name"></span>
+                <div class="logout-menu">
+                    <a href="/logout">Logout</a>
+                </div>
             </div>
         </header>
 
-        <button class="create-task-btn">Nova tarefa</button>
+        <a href="#" class="nova-tarefa-btn">Nova Tarefa</a>
 
-        <div class="kanban-board">
+        <div class="kanban-board" data-projeto-id="[[${projeto.idProjeto}]]">
             <div class="kanban-column pending">
                 <h2>Pendente</h2>
+                <div th:each="tarefa : ${tarefas}" 
+                     th:if="${tarefa.status} == 'Pendente'" 
+                     class="task-card">
+                    <span th:text="${tarefa.nome}"></span>
+                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${tarefa.prioridade}"></span>
+                </div>
             </div>
+
             <div class="kanban-column in-progress">
                 <h2>Em Andamento</h2>
+                <div th:each="tarefa : ${tarefas}" 
+                     th:if="${tarefa.status} == 'Em Andamento'" 
+                     class="task-card">
+                    <span th:text="${tarefa.nome}"></span>
+                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${tarefa.prioridade}"></span>
+                </div>
             </div>
+
             <div class="kanban-column completed">
                 <h2>Concluído</h2>
+                <div th:each="tarefa : ${tarefas}" 
+                     th:if="${tarefa.status} == 'Concluído'" 
+                     class="task-card">
+                    <span th:text="${tarefa.nome}"></span>
+                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${tarefa.prioridade}"></span>
+                </div>
             </div>
         </div>
     </div>

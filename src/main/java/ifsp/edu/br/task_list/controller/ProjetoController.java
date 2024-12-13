@@ -1,7 +1,9 @@
 package ifsp.edu.br.task_list.controller;
 
 import ifsp.edu.br.task_list.model.Projeto;
+import ifsp.edu.br.task_list.model.Tarefa;
 import ifsp.edu.br.task_list.service.ProjetoService;
+import ifsp.edu.br.task_list.service.TarefaService;
 import ifsp.edu.br.task_list.service.UsuarioService;
 
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,13 @@ public class ProjetoController {
 
     private final ProjetoService projetoService;
     private final UsuarioService usuarioService;
+    private final TarefaService tarefaService;
 
-    public ProjetoController(ProjetoService projetoService, UsuarioService usuarioService) {
+    public ProjetoController(ProjetoService projetoService, UsuarioService usuarioService,
+            TarefaService tarefaService) {
         this.projetoService = projetoService;
         this.usuarioService = usuarioService;
+        this.tarefaService = tarefaService;
     }
 
     @GetMapping("/usuario/{idUsuario}")
@@ -75,12 +80,19 @@ public class ProjetoController {
     }
 
     @GetMapping("/{idProjeto}/kanban")
-    public String exibirQuadroKanban(@PathVariable Long idProjeto, Model model) {
+    public String mostrarKanban(@PathVariable Long idProjeto, Model model) {
         Projeto projeto = projetoService.buscarPorId(idProjeto);
         if (projeto == null) {
             throw new RuntimeException("Projeto não encontrado");
         }
+
+        List<Tarefa> tarefas = tarefaService.listarPorProjeto(idProjeto);
+        System.out.println("Tarefas para o projeto " + idProjeto + ": " + tarefas);
+
+        model.addAttribute("usuario", projeto.getUsuario());
         model.addAttribute("projeto", projeto);
+        model.addAttribute("tarefas", tarefas);
+
         return "kanban";
     }
 

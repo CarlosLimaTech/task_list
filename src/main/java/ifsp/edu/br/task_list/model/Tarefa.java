@@ -20,6 +20,7 @@ public class Tarefa {
     private Usuario usuario;
 
     private String nome;
+
     public String getNome() {
         return nome;
     }
@@ -29,6 +30,7 @@ public class Tarefa {
     }
 
     private String descricaoTarefa;
+
     public String getDescricaoTarefa() {
         return descricaoTarefa;
     }
@@ -38,6 +40,7 @@ public class Tarefa {
     }
 
     private String prioridade;
+
     public String getPrioridade() {
         return prioridade;
     }
@@ -61,5 +64,25 @@ public class Tarefa {
 
     @Temporal(TemporalType.DATE)
     private Date dataFim;
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public void setIdTarefa(Integer id) {
+        this.idTarefa = id;
+    }
 
 }
