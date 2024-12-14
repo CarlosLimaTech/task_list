@@ -11,7 +11,7 @@
         <header>
             <div>
                 <h1 th:text="'Projeto ' + ${projeto.nomeProjeto}"></h1>
-                <p th:text="${projeto.dataInicio} + ' - ' + ${projeto.dataFim}"></p>
+                <p th:text="${#dates.format(projeto.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(projeto.dataFim, 'dd/MM/yyyy')}"></p>
             </div>
             <div class="user-info">
                 <i class="user-icon">👤</i>
@@ -24,14 +24,14 @@
 
         <a href="#" class="nova-tarefa-btn">Nova Tarefa</a>
 
-        <div class="kanban-board" data-projeto-id="[[${projeto.idProjeto}]]">
+        <div class="kanban-board" th:attr="data-projeto-id=${projeto.idProjeto}">
             <div class="kanban-column pending">
                 <h2>Pendente</h2>
                 <div th:each="tarefa : ${tarefas}" 
                      th:if="${tarefa.status} == 'Pendente'" 
                      class="task-card">
                     <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
                     <span th:text="${tarefa.prioridade}"></span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                      th:if="${tarefa.status} == 'Em Andamento'" 
                      class="task-card">
                     <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
                     <span th:text="${tarefa.prioridade}"></span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                      th:if="${tarefa.status} == 'Concluído'" 
                      class="task-card">
                     <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${tarefa.dataInicio} + ' - ' + ${tarefa.dataFim}"></span>
+                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
                     <span th:text="${tarefa.prioridade}"></span>
                 </div>
             </div>

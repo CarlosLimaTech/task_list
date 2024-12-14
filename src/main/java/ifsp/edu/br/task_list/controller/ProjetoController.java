@@ -23,7 +23,7 @@ public class ProjetoController {
     private final TarefaService tarefaService;
 
     public ProjetoController(ProjetoService projetoService, UsuarioService usuarioService,
-                             TarefaService tarefaService) {
+            TarefaService tarefaService) {
         this.projetoService = projetoService;
         this.usuarioService = usuarioService;
         this.tarefaService = tarefaService;

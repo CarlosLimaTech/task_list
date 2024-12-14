@@ -6,9 +6,9 @@ VALUES
 INSERT INTO Projeto (id_projeto, id_usuario, nome_projeto, descricao_projeto, data_inicio, data_fim)
 VALUES
 (1, 1, 'Projeto A', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
-(2, 1, 'Projeto B', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
+(2, 2, 'Projeto B', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
 (3, 1, 'Projeto C', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
-(4, 1, 'Projeto D', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
+(4, 2, 'Projeto D', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
 (5, 1, 'Projeto E', 'Descrição do Projeto A', '2024-01-01', '2024-06-01');
 
 
