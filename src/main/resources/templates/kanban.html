@@ -13,7 +13,7 @@
                 <h1 th:text="'Projeto ' + ${projeto.nomeProjeto}"></h1>
                 <p th:text="${#dates.format(projeto.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(projeto.dataFim, 'dd/MM/yyyy')}"></p>
             </div>
-            <div class="user-info">
+            <div class="user-info" th:attr="data-usuario-id=${usuario.idUsuario}">
                 <i class="user-icon">👤</i>
                 <span th:text="${usuario.username}" class="user-name"></span>
                 <div class="logout-menu">
