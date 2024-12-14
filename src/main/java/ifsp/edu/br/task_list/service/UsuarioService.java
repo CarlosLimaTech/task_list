@@ -20,4 +20,9 @@ public class UsuarioService {
     public boolean validarSenha(Usuario usuario, String senha) {
         return usuario != null && usuario.getPassword().equals(senha);
     }    
+
+    public Usuario buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
 }

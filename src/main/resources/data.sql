@@ -1,7 +1,7 @@
 INSERT INTO Usuario (id_usuario, username, email, password)
 VALUES 
 (1, 'Carlos Silva', 'carlos.silva@example.com', '123'),
-(2, 'Ana Souza', 'ana.souza@example.com', 'senha456');
+(2, 'Ana Souza', 'ana.souza@example.com', '456');
 
 INSERT INTO Projeto (id_projeto, id_usuario, nome_projeto, descricao_projeto, data_inicio, data_fim)
 VALUES

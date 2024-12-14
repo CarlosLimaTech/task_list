@@ -9,9 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
-
-    List<Projeto> findByUsuarioIdUsuario(Long idUsuario);
-
+    List<Projeto> findByUsuarioIdUsuario(Integer idUsuario);
 }
-
-

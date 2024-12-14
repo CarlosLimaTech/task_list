@@ -2,6 +2,7 @@ package ifsp.edu.br.task_list.controller;
 
 import ifsp.edu.br.task_list.model.Projeto;
 import ifsp.edu.br.task_list.model.Tarefa;
+import ifsp.edu.br.task_list.model.Usuario;
 import ifsp.edu.br.task_list.service.ProjetoService;
 import ifsp.edu.br.task_list.service.TarefaService;
 import ifsp.edu.br.task_list.service.UsuarioService;
@@ -22,15 +23,10 @@ public class ProjetoController {
     private final TarefaService tarefaService;
 
     public ProjetoController(ProjetoService projetoService, UsuarioService usuarioService,
-            TarefaService tarefaService) {
+                             TarefaService tarefaService) {
         this.projetoService = projetoService;
         this.usuarioService = usuarioService;
         this.tarefaService = tarefaService;
-    }
-
-    @GetMapping("/usuario/{idUsuario}")
-    public List<Projeto> listarProjetosPorUsuario(@PathVariable Long idUsuario) {
-        return projetoService.listarProjetosPorUsuario(idUsuario);
     }
 
     @PostMapping("/criar")
@@ -52,10 +48,12 @@ public class ProjetoController {
     }
 
     @GetMapping
-    public String listarTodosProjetos(Model model) {
-        List<Projeto> projetos = projetoService.listarTodos();
+    public String listarProjetosDoUsuarioLogado(Principal principal, Model model) {
+        String email = principal.getName();
+        Usuario usuario = usuarioService.buscarPorEmail(email);
+        List<Projeto> projetos = projetoService.listarProjetosPorUsuario(usuario.getIdUsuario());
         model.addAttribute("projetos", projetos);
-        return "projetos";
+        return "projetos"; // Nome do template a ser exibido
     }
 
     @GetMapping("/editar/{id}")
@@ -87,8 +85,6 @@ public class ProjetoController {
         }
 
         List<Tarefa> tarefas = tarefaService.listarPorProjeto(idProjeto);
-        System.out.println("Tarefas para o projeto " + idProjeto + ": " + tarefas);
-
         model.addAttribute("usuario", projeto.getUsuario());
         model.addAttribute("projeto", projeto);
         model.addAttribute("tarefas", tarefas);

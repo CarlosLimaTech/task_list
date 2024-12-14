@@ -44,5 +44,8 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarefa> tarefas;
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
 }
