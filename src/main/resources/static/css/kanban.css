@@ -50,6 +50,7 @@
 /* Estilo dos cartões de tarefas */
 .task-card {
     padding: 10px;
+    margin-bottom: 10px; /* Espaçamento entre os cartões */
     border-radius: 5px;
     background-color: #e3e3ff; /* Roxo claro */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,6 +61,10 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.task-card:last-child {
+    margin-bottom: 0; /* Remove margem inferior do último cartão */
 }
 
 .task-card:hover {

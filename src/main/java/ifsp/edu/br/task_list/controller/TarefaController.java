@@ -35,7 +35,6 @@ public class TarefaController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        // Associa o projeto à tarefa
         Projeto projeto = projetoService.buscarPorId(idProjeto);
         tarefa.setProjeto(projeto);
 

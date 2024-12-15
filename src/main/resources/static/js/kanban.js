@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Captura os IDs do projeto e do usuário diretamente do DOM
     const usuarioId = document.querySelector(".user-info").getAttribute("data-usuario-id");
     const projetoId = document.querySelector(".kanban-board").getAttribute("data-projeto-id");
 
-    // Inicializa o carregamento das tarefas
     carregarTarefas();
 
-    // Abrir o modal para criar ou editar tarefa
     function abrirModal(tarefa = null) {
         const modal = document.getElementById('tarefaModal');
         const modalTitle = document.getElementById('modalTitle');
@@ -38,37 +35,17 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(`/projetos/${projetoId}/kanban/tarefas`);
             const tarefas = await response.json();
-    
-            // Limpa as colunas antes de adicionar as tarefas
+
             document.querySelectorAll('.kanban-column .tarefas').forEach(column => {
-                column.innerHTML = ''; // Garante que as colunas estejam vazias
+                column.innerHTML = ''; // Limpa as colunas
             });
-    
-            // Adiciona as tarefas nas colunas correspondentes
-            tarefas.forEach((tarefa) => {
-                const columnClass = tarefa.status.toLowerCase().replace(' ', '-');
-                const column = document.querySelector(`.kanban-column.${columnClass} .tarefas`);
-    
-                if (column) {
-                    const taskCard = document.createElement('div');
-                    taskCard.className = 'task-card';
-                    taskCard.innerHTML = `
-                        <strong>${tarefa.nome}</strong>
-                        <p>${tarefa.descricaoTarefa || ''}</p>
-                        <p>Prioridade: ${tarefa.prioridade || 'Sem prioridade'}</p>
-                        <p>${tarefa.dataInicio} - ${tarefa.dataFim}</p>
-                        <button onclick="abrirModal(${JSON.stringify(tarefa)})">Editar</button>
-                        <button onclick="excluirTarefa(${tarefa.idTarefa})">Excluir</button>
-                    `;
-    
-                    column.appendChild(taskCard);
-                }
-            });
+
+            tarefas.forEach(tarefa => adicionarTarefaAoKanban(tarefa));
         } catch (err) {
             console.error("Erro ao carregar tarefas:", err);
         }
     }
-    
+
     function adicionarTarefaAoKanban(tarefa) {
         const statusClasses = {
             "Pendente": "pending",
@@ -77,33 +54,21 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         const columnClass = statusClasses[tarefa.status];
-        const column = document.querySelector(`.kanban-column.${columnClass}`);
+        const column = document.querySelector(`.kanban-column.${columnClass} .tarefas`);
 
         if (column) {
             const taskCard = document.createElement('div');
             taskCard.className = 'task-card';
-            taskCard.dataset.id = tarefa.idTarefa;
 
-            // Conteúdo do card
-            const taskContent = `
-                <p><strong>${tarefa.nome}</strong></p>
-                <p>${tarefa.descricaoTarefa}</p>
-                <p>Prioridade: ${tarefa.prioridade}</p>
-                <p>${tarefa.dataInicio} - ${tarefa.dataFim}</p>
+            // Ajusta a formatação das datas
+            const dataInicioFormatada = formatarDataISO(tarefa.dataInicio);
+            const dataFimFormatada = formatarDataISO(tarefa.dataFim);
+
+            taskCard.innerHTML = `
+                <span>${tarefa.nome}</span>
+                <span>${dataInicioFormatada} - ${dataFimFormatada}</span>
+                <span>${tarefa.prioridade}</span>
             `;
-            taskCard.innerHTML = taskContent;
-
-            // Botões
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Editar';
-            editButton.onclick = () => abrirModal(tarefa);
-
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Excluir';
-            deleteButton.onclick = () => excluirTarefa(tarefa.idTarefa);
-
-            taskCard.appendChild(editButton);
-            taskCard.appendChild(deleteButton);
 
             column.appendChild(taskCard);
         } else {
@@ -111,21 +76,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Enviar dados para criar ou editar uma tarefa
+
+
     document.getElementById('formTarefa').addEventListener('submit', async (event) => {
         event.preventDefault();
-    
+
         const tarefaId = document.getElementById('tarefaId').value;
         const nome = document.getElementById('nome').value;
         const descricao = document.getElementById('descricao').value;
         const prioridade = document.getElementById('prioridade').value;
         const status = document.getElementById('status').value;
-        const dataInicio = document.getElementById('dataInicio').value;
-        const dataFim = document.getElementById('dataFim').value;
-    
+        const dataInicio = document.getElementById('dataInicio').value; // Já no formato YYYY-MM-DD
+        const dataFim = document.getElementById('dataFim').value; // Sem alterações
+
+
         const url = tarefaId ? `/projetos/${projetoId}/kanban/tarefas/${tarefaId}` : `/projetos/${projetoId}/kanban/tarefas`;
         const method = tarefaId ? 'PUT' : 'POST';
-    
+
         try {
             const response = await fetch(url, {
                 method: method,
@@ -142,18 +109,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     usuario: { idUsuario: usuarioId }
                 }),
             });
-    
+
             if (response.ok) {
-                const novaTarefa = await response.json(); // Recupera a nova tarefa salva no backend
-    
+                const novaTarefa = await response.json();
+
                 if (tarefaId) {
-                    // Se for edição, recarrega a lista completa
-                    carregarTarefas();
+                    carregarTarefas(); // Atualiza todas as tarefas no caso de edição
                 } else {
-                    // Adiciona apenas a nova tarefa ao DOM
-                    adicionarTarefaAoKanban(novaTarefa);
+                    adicionarTarefaAoKanban(novaTarefa); // Adiciona a nova tarefa ao DOM
                 }
-    
+
                 fecharModal();
             } else {
                 alert('Erro ao salvar a tarefa!');
@@ -162,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Erro ao salvar tarefa:', err);
         }
     });
-    
+
     async function excluirTarefa(tarefaId) {
         if (confirm('Deseja realmente excluir esta tarefa?')) {
             try {
@@ -179,10 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const novaTarefaBtn = document.querySelector('.nova-tarefa-btn');
-    if (novaTarefaBtn) {
-        novaTarefaBtn.addEventListener('click', () => abrirModal());
-    }
+    document.querySelector('.nova-tarefa-btn').addEventListener('click', () => abrirModal());
 
     window.onclick = function (event) {
         const modal = document.getElementById('tarefaModal');
@@ -190,4 +152,12 @@ document.addEventListener("DOMContentLoaded", function () {
             fecharModal();
         }
     };
+
+    function formatarDataISO(dataISO) {
+        // Garantir que a data esteja no formato YYYY-MM-DD sem horário
+        const partes = dataISO.split("T")[0].split("-");
+        const [ano, mes, dia] = partes;
+        return `${dia}/${mes}/${ano}`;
+    }
+
 });

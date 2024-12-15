@@ -66,36 +66,19 @@
         <div class="kanban-board" th:attr="data-projeto-id=${projeto.idProjeto}">
             <div class="kanban-column pending">
                 <h2>Pendente</h2>
-                <div th:each="tarefa : ${tarefas}" 
-                     th:if="${tarefa.status} == 'Pendente'" 
-                     class="task-card">
-                    <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
-                    <span th:text="${tarefa.prioridade}"></span>
-                </div>
+                <div class="tarefas"></div>
             </div>
-
+            
             <div class="kanban-column in-progress">
                 <h2>Em Andamento</h2>
-                <div th:each="tarefa : ${tarefas}" 
-                     th:if="${tarefa.status} == 'Em Andamento'" 
-                     class="task-card">
-                    <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
-                    <span th:text="${tarefa.prioridade}"></span>
-                </div>
+                <div class="tarefas"></div>
             </div>
-
+            
             <div class="kanban-column completed">
                 <h2>Concluído</h2>
-                <div th:each="tarefa : ${tarefas}" 
-                     th:if="${tarefa.status} == 'Concluído'" 
-                     class="task-card">
-                    <span th:text="${tarefa.nome}"></span>
-                    <span th:text="${#dates.format(tarefa.dataInicio, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(tarefa.dataFim, 'dd/MM/yyyy')}"></span>
-                    <span th:text="${tarefa.prioridade}"></span>
-                </div>
+                <div class="tarefas"></div>
             </div>
+            
         </div>
     </div>
 </body>
