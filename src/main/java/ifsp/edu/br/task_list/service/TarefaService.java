@@ -17,11 +17,8 @@ public class TarefaService {
     }
 
     public List<Tarefa> listarPorProjeto(Long idProjeto) {
-        List<Tarefa> tarefas = tarefaRepository.findByProjetoIdProjeto(idProjeto);
-        System.out.println("Tarefas carregadas: " + tarefas.size());
-        return tarefas;
+        return tarefaRepository.findByProjetoIdProjeto(idProjeto);
     }
-    
 
     public Tarefa salvar(Tarefa tarefa) {
         return tarefaRepository.save(tarefa);
