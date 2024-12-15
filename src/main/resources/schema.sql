@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     id_usuario BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(45),
     email VARCHAR(45),
-    password VARCHAR(45)
+    password VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS Projeto (

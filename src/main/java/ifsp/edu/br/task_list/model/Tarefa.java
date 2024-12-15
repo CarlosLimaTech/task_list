@@ -39,7 +39,6 @@ public class Tarefa {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataFim;
 
-    // Getters e Setters
     public Integer getIdTarefa() {
         return idTarefa;
     }

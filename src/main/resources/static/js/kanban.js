@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('dataInicio').value = tarefa.dataInicio;
             document.getElementById('dataFim').value = tarefa.dataFim;
     
-            btnExcluir.style.display = 'inline-block'; // Exibe o botão de excluir
-            btnExcluir.onclick = () => excluirTarefa(tarefa.idTarefa); // Adiciona evento de exclusão
+            btnExcluir.style.display = 'inline-block';
+            btnExcluir.onclick = () => excluirTarefa(tarefa.idTarefa);
         } else {
             modalTitle.textContent = 'Nova Tarefa';
             form.reset();
             document.getElementById('tarefaId').value = '';
-            btnExcluir.style.display = 'none'; // Oculta o botão de excluir
+            btnExcluir.style.display = 'none';
         }
     
         modal.style.display = 'block';
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const tarefas = await response.json();
 
             document.querySelectorAll('.kanban-column .tarefas').forEach(column => {
-                column.innerHTML = ''; // Limpa as colunas
+                column.innerHTML = '';
             });
 
             tarefas.forEach(tarefa => adicionarTarefaAoKanban(tarefa));
@@ -67,14 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const taskCard = document.createElement('div');
             taskCard.className = 'task-card';
     
-            // Adiciona evento para abrir o modal ao clicar na tarefa
             taskCard.addEventListener('click', () => abrirModal(tarefa));
     
-            // Ajusta a formatação das datas
             const dataInicioFormatada = formatarDataISO(tarefa.dataInicio);
             const dataFimFormatada = formatarDataISO(tarefa.dataFim);
     
-            // Conteúdo do cartão
             taskCard.innerHTML = `
                 <span>${tarefa.nome}</span>
                 <span>${dataInicioFormatada} - ${dataFimFormatada}</span>
@@ -98,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const descricao = document.getElementById('descricao').value;
         const prioridade = document.getElementById('prioridade').value;
         const status = document.getElementById('status').value;
-        const dataInicio = document.getElementById('dataInicio').value; // Já no formato YYYY-MM-DD
-        const dataFim = document.getElementById('dataFim').value; // Sem alterações
+        const dataInicio = document.getElementById('dataInicio').value;
+        const dataFim = document.getElementById('dataFim').value;
 
 
         const url = tarefaId ? `/projetos/${projetoId}/kanban/tarefas/${tarefaId}` : `/projetos/${projetoId}/kanban/tarefas`;
@@ -126,9 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const novaTarefa = await response.json();
 
                 if (tarefaId) {
-                    carregarTarefas(); // Atualiza todas as tarefas no caso de edição
+                    carregarTarefas();
                 } else {
-                    adicionarTarefaAoKanban(novaTarefa); // Adiciona a nova tarefa ao DOM
+                    adicionarTarefaAoKanban(novaTarefa);
                 }
 
                 fecharModal();
@@ -167,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function formatarDataISO(dataISO) {
-        // Garantir que a data esteja no formato YYYY-MM-DD sem horário
         const partes = dataISO.split("T")[0].split("-");
         const [ano, mes, dia] = partes;
         return `${dia}/${mes}/${ano}`;

@@ -14,21 +14,18 @@ import java.util.List;
 public class TarefaController {
 
     private final TarefaService tarefaService;
-    private final ProjetoService projetoService; // Adicionar a dependência do ProjetoService
+    private final ProjetoService projetoService;
 
-    // Construtor com injeção de dependências
     public TarefaController(TarefaService tarefaService, ProjetoService projetoService) {
         this.tarefaService = tarefaService;
-        this.projetoService = projetoService; // Inicializar o ProjetoService
+        this.projetoService = projetoService;
     }
 
-    // Listar todas as tarefas de um projeto específico
     @GetMapping
     public ResponseEntity<List<Tarefa>> listarPorProjeto(@PathVariable Long idProjeto) {
         return ResponseEntity.ok(tarefaService.listarPorProjeto(idProjeto));
     }
 
-    // Criar uma nova tarefa associada ao projeto
     @PostMapping
     public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa, @PathVariable Long idProjeto) {
         if (tarefa.getUsuario() == null || tarefa.getUsuario().getIdUsuario() == null) {
@@ -42,23 +39,20 @@ public class TarefaController {
         return ResponseEntity.ok(novaTarefa);
     }
 
-    // Atualizar uma tarefa específica
     @PutMapping("/{id}")
     public ResponseEntity<Tarefa> atualizarTarefa(
             @PathVariable Long idProjeto, @PathVariable Integer id, @RequestBody Tarefa tarefa) {
-        tarefa.setIdTarefa(id); // Define o ID da tarefa
-        tarefa.getProjeto().setIdProjeto(idProjeto); // Garante que o projeto está associado corretamente
+        tarefa.setIdTarefa(id);
+        tarefa.getProjeto().setIdProjeto(idProjeto);
         return ResponseEntity.ok(tarefaService.salvar(tarefa));
     }
 
-    // Deletar uma tarefa específica
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarTarefa(@PathVariable Long idProjeto, @PathVariable Integer id) {
         tarefaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
-    // Atualizar apenas o status de uma tarefa
     @PatchMapping("/{id}/status")
     public ResponseEntity<Tarefa> atualizarStatus(
             @PathVariable Long idProjeto, @PathVariable Integer id, @RequestParam String status) {

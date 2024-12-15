@@ -1,4 +1,4 @@
-INSERT INTO Usuario (id_usuario, username, email, password)
+/*INSERT INTO Usuario (id_usuario, username, email, password)
 VALUES 
 (1, 'Carlos Silva', 'carlos.silva@example.com', '123'),
 (2, 'Ana Souza', 'ana.souza@example.com', '456');
@@ -9,7 +9,7 @@ VALUES
 (2, 2, 'Projeto B', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
 (3, 1, 'Projeto C', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
 (4, 2, 'Projeto D', 'Descrição do Projeto A', '2024-01-01', '2024-06-01'),
-(5, 1, 'Projeto E', 'Descrição do Projeto A', '2024-01-01', '2024-06-01');
+(5, 1, 'Projeto E', 'Descrição do Projeto A', '2024-01-01', '2024-06-01');*/
 
 
 

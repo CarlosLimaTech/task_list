@@ -53,7 +53,7 @@ public class ProjetoController {
         Usuario usuario = usuarioService.buscarPorEmail(email);
         List<Projeto> projetos = projetoService.listarProjetosPorUsuario(usuario.getIdUsuario());
         model.addAttribute("projetos", projetos);
-        return "projetos"; // Nome do template a ser exibido
+        return "projetos";
     }
 
     @GetMapping("/editar/{id}")

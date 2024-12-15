@@ -10,7 +10,6 @@
     <div class="form-container">
         <h1>Login</h1>
         
-        <!-- Mensagem de erro -->
         <div th:if="${param.error}" class="error-message">
             <p>Email ou senha inválidos.</p>
         </div>
@@ -38,10 +37,9 @@
         
             if (!email || !password) {
                 alert('Por favor, preencha todos os campos.');
-                event.preventDefault(); // Impede o envio do formulário
+                event.preventDefault();
             }
         
-            // Validação simples de email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Por favor, insira um email válido.');
