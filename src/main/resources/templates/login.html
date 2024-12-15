@@ -9,7 +9,13 @@
 <body>
     <div class="form-container">
         <h1>Login</h1>
-        <form method="POST" action="/login">
+        
+        <!-- Mensagem de erro -->
+        <div th:if="${param.error}" class="error-message">
+            <p>Email ou senha inválidos.</p>
+        </div>
+
+        <form method="POST" action="/login" id="loginForm">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu email" required>
@@ -20,12 +26,29 @@
             </div>
             <button type="submit" class="btn">Entrar</button>
         </form>
+
         <div class="footer">
             Não tem cadastro? <a href="/register">Cadastre-se</a>
         </div>
-        <div class="success-message">
-            <p th:if="${param.success}" th:text="'Cadastro realizado com sucesso! Faça login.'"></p>
-        </div>
     </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+        
+            if (!email || !password) {
+                alert('Por favor, preencha todos os campos.');
+                event.preventDefault(); // Impede o envio do formulário
+            }
+        
+            // Validação simples de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um email válido.');
+                event.preventDefault();
+            }
+        });
+        </script>
+        
 </body>
 </html>
