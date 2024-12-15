@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById('tarefaModal');
         const modalTitle = document.getElementById('modalTitle');
         const form = document.getElementById('formTarefa');
-
+        const btnExcluir = document.getElementById('btnExcluir');
+    
         if (tarefa) {
             modalTitle.textContent = 'Editar Tarefa';
             document.getElementById('tarefaId').value = tarefa.idTarefa;
@@ -18,18 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('status').value = tarefa.status;
             document.getElementById('dataInicio').value = tarefa.dataInicio;
             document.getElementById('dataFim').value = tarefa.dataFim;
+    
+            btnExcluir.style.display = 'inline-block'; // Exibe o botão de excluir
+            btnExcluir.onclick = () => excluirTarefa(tarefa.idTarefa); // Adiciona evento de exclusão
         } else {
             modalTitle.textContent = 'Nova Tarefa';
             form.reset();
             document.getElementById('tarefaId').value = '';
+            btnExcluir.style.display = 'none'; // Oculta o botão de excluir
         }
-
+    
         modal.style.display = 'block';
     }
+    
 
     function fecharModal() {
         document.getElementById('tarefaModal').style.display = 'none';
     }
+    
 
     async function carregarTarefas() {
         try {
@@ -52,29 +59,34 @@ document.addEventListener("DOMContentLoaded", function () {
             "Em Andamento": "in-progress",
             "Concluído": "completed"
         };
-
+    
         const columnClass = statusClasses[tarefa.status];
         const column = document.querySelector(`.kanban-column.${columnClass} .tarefas`);
-
+    
         if (column) {
             const taskCard = document.createElement('div');
             taskCard.className = 'task-card';
-
+    
+            // Adiciona evento para abrir o modal ao clicar na tarefa
+            taskCard.addEventListener('click', () => abrirModal(tarefa));
+    
             // Ajusta a formatação das datas
             const dataInicioFormatada = formatarDataISO(tarefa.dataInicio);
             const dataFimFormatada = formatarDataISO(tarefa.dataFim);
-
+    
+            // Conteúdo do cartão
             taskCard.innerHTML = `
                 <span>${tarefa.nome}</span>
                 <span>${dataInicioFormatada} - ${dataFimFormatada}</span>
                 <span>${tarefa.prioridade}</span>
             `;
-
+    
             column.appendChild(taskCard);
         } else {
             console.error(`Coluna para status "${tarefa.status}" não encontrada.`);
         }
     }
+    
 
 
 
@@ -135,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (response.ok) {
                     carregarTarefas();
+                    fecharModal();
                 } else {
                     alert('Erro ao excluir a tarefa!');
                 }
@@ -159,5 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const [ano, mes, dia] = partes;
         return `${dia}/${mes}/${ano}`;
     }
+
+    document.querySelector('.close-btn').addEventListener('click', fecharModal);
 
 });
