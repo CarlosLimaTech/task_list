@@ -19,7 +19,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage(@ModelAttribute("error") String error) {
-        System.out.println("Erro recebido: " + error);
         return "login";
     }
 

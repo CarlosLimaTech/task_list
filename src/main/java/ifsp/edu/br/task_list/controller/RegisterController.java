@@ -3,8 +3,6 @@ package ifsp.edu.br.task_list.controller;
 import ifsp.edu.br.task_list.model.Usuario;
 import ifsp.edu.br.task_list.repository.UsuarioRepository;
 import ifsp.edu.br.task_list.service.UsuarioService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +15,6 @@ public class RegisterController {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioService usuarioService;
 
-    @Autowired
     public RegisterController(UsuarioRepository usuarioRepository, UsuarioService usuarioService) {
         this.usuarioRepository = usuarioRepository;
         this.usuarioService = usuarioService;

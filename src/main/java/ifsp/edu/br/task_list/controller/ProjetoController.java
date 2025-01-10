@@ -52,6 +52,7 @@ public class ProjetoController {
         String email = principal.getName();
         Usuario usuario = usuarioService.buscarPorEmail(email);
         List<Projeto> projetos = projetoService.listarProjetosPorUsuario(usuario.getIdUsuario());
+        model.addAttribute("usuario", usuario);
         model.addAttribute("projetos", projetos);
         return "projetos";
     }
